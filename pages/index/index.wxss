@@ -1,0 +1,158 @@
+/**index.wxss**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.head_box{
+  display: flex;
+  justify-content: center;
+  padding-top: 80rpx;
+}
+.head_box>view{
+  font-size :40rpx;
+  font-weight: 545;
+  line-height: 50rpx;
+}
+.mqtt_box {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  height: 80rpx;
+  margin: 38rpx 32rpx 0;
+  box-shadow:0 8rpx 20rpx 0 rgba(0, 0, 0, 0.3);
+  border-radius:32rpx;
+  font-size: 35rpx;
+  line-height: 80rpx;
+}
+.btn_style{
+  margin: 30rpx 0;
+  display: flex;
+  justify-content: space-around;
+}
+.led_style{
+  margin: 50rpx 0;
+  display: flex;
+  justify-content: space-around;
+}
+.van-button,
+.van-button--default,
+.van-button--small{
+  width: 250rpx;
+}
+.subscribe_text{
+  margin-left: 32rpx;
+}
+.dd{
+  display: flex;
+  justify-content: space-between;
+  height: 100rpx;
+  padding: 0 30rpx;
+  margin: 26rpx 32rpx 0;
+  box-shadow:0 8rpx 20rpx 0 rgba(0, 0, 0, 0.3);
+  border-radius:32rpx;
+  font-size: 50rpx;
+  line-height: 100rpx;
+}
+.atmosphere_box {
+  display: flex;
+  justify-content: space-between;
+  height: 95rpx;
+  padding: 0 30rpx;
+  margin: 1rpx 10rpx 0;
+  font-size: 40rpx;
+  line-height: 100rpx;
+}
+.follow_box {
+  display: flex;
+  justify-content: space-between;
+  height: 85rpx;
+  padding: 0 30rpx;
+  margin: 1rpx 10rpx 0;
+  font-size: 40rpx;
+  line-height: 150rpx;
+}
+.special_box {
+  display: flex;
+  justify-content: space-between;
+  height: 80rpx;
+  box-shadow:0 8rpx 20rpx 0 rgba(0, 0, 0, 0.3);
+  border-radius:32rpx;
+  font-size: 37rpx;
+  margin: 26rpx 32rpx 0;
+  line-height: 80rpx;
+  padding: 0 40rpx;
+}
+.regulate_box {
+  padding: 0 30rpx;
+  margin: 0rpx 100rpx 0;
+}
+.time_box {
+  padding: 0 30rpx;
+  margin: 0rpx 150rpx 0;
+}
+.brightness_box {
+  display: flex;
+  justify-content: space-between;
+  height: 70rpx;
+  padding: 0 30rpx;
+  margin: 0rpx 10rpx 0;
+  font-size: 40rpx;
+  line-height: 60rpx;
+}
+.color1_box {
+  display: flex;
+  justify-content: space-around;
+  height: 210rpx;
+  padding: 0 10rpx;
+  margin: 10rpx 30rpx 0;
+  border-radius:32rpx;
+  font-size: 36rpx;
+}
+.color_box {
+  font-size :38rpx;
+  font-weight: 500;
+  margin: 0rpx 39rpx 0;
+}
+.ligth_box {
+  font-size :38rpx;
+  font-weight: 500;
+  margin: 30rpx 39rpx 0;
+}
+.ligth1_box {
+  font-size :38rpx;
+  font-weight: 500;
+  margin: 115rpx 39rpx 0;
+}
+.ligth2_box {
+  font-size :38rpx;
+  font-weight: 500;
+  margin: 218rpx 39rpx 0;
+}
+.led_box {
+  height: 800rpx;
+  box-shadow:0 8rpx 20rpx 0 rgba(0, 0, 0, 0.3);
+  border-radius:32rpx;
+  margin: 10rpx 32rpx 0;
+}
+.car_box {
+  height:650rpx;
+  box-shadow:0 8rpx 20rpx 0 rgba(0, 0, 0, 0.3);
+  border-radius:32rpx;
+  margin: 30rpx 32rpx 0;
+}
+.button_box {
+  height: 150rpx;
+  margin: 0rpx 260rpx 0;
+}
+.up_box {
+  display: flex;
+  justify-content: space-between;
+  height: 140rpx;
+  padding: 0 100rpx;
+  margin: 0rpx 10rpx 0;
+}
+.down_box {
+  height: 100rpx;
+  margin: 0rpx 260rpx 0;
+}

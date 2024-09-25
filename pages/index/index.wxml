@@ -1,0 +1,230 @@
+
+<view class="container">
+ <!-- 标题 -->
+  <view class="head_box">
+    <view>
+    <view>{{title}}</view>
+    </view>
+  </view>
+  <!-- mqtt连接 -->
+  <view class="mqtt_box" bindtap="openDialog">
+    <view>
+    <van-icon wx:if="{{!mqttConnectDialog}}"name="arrow-down"/>
+     <van-icon wx:if="{{mqttConnectDialog}}"name="arrow-up" />
+     MQTT服务器
+   </view>
+   <view style="color:{{isConnect?'rgb(0,176,80)':'rgb(192,0,0)'}}">
+       {{isConnect?'已连接':'未连接'}}
+    </view>
+  </view>
+    <!-- 蓝牙连接 -->
+    <view class="mqtt_box" bindtap="openBluetoothDialog">
+    <view>
+    <van-icon wx:if="{{!bluetoothDialog}}"name="arrow-down"/>
+     <van-icon wx:if="{{bluetoothDialog}}"name="arrow-up" />
+     蓝牙
+   </view>
+  </view>
+  <!-- 灯 -->
+  <view class="mqtt_box" bindtap="open1" wx:if="{{!isOpen1}}">
+    <view>
+    <van-icon wx:if="{{!isOpen1}}"name="arrow-down"/>
+     灯
+   </view>
+   <view style="color:{{isLedOpen?'rgb(0,176,80)':'rgb(192,0,0)'}}">
+       {{isLedOpen?'已开灯':'未开灯'}}
+    </view>
+  </view>
+  <view class="led_box"  name="arrow-up" wx:if="{{isOpen1}}" >
+    <van-icon wx:if="{{isOpen1}}"name="arrow-up" size="25px" bindtap="open1"/>
+  <view class="atmosphere_box">
+      <view >氛围模式</view>
+      <view >
+        <switch checked="{{isAtmOpen}}" color="#97baff" bindchange="onChange1"/></view>
+  </view>
+  <view class="brightness_box">
+      <view >自动调亮</view>
+      <view wx:if="{{!isAtmOpen}}">
+        <switch checked="{{isBriOpen}}" color="#97baff"  bindchange="onChange2" />
+      </view>
+      <view wx:if="{{isAtmOpen}}">
+        <switch checked="{{isBriOpen}}" color="#97baff" disabled bindchange="" />
+      </view>
+  </view>
+  <view class="color_box">颜色</view>
+  <view class="color1_box">
+  <van-radio-group
+    colornum="{{ radio }}"
+  bind:change="onChange3"
+  direction="horizontal"
+>
+  <van-radio name="1" icon-size="27px">红</van-radio>
+  <van-radio name="2" icon-size="27px">橙</van-radio>
+  <van-radio name="3" icon-size="27px">黄</van-radio>
+  <van-radio name="4" icon-size="27px">绿</van-radio>
+  <van-radio name="5" icon-size="27px">青</van-radio>
+  <van-radio name="6" icon-size="27px">蓝</van-radio>
+  <van-radio name="7" icon-size="27px">紫</van-radio>
+  <van-radio name="8" icon-size="27px"  wx:if="{{!isBriOpen&&!isAtmOpen}}">
+  <van-field label="R值"model:value="{{ CustomizeR }}"bind:change="onChangeR"/>
+  <van-field label="G值"model:value="{{ CustomizeG }}"bind:change="onChangeG"/>
+  <van-field label="B值"model:value="{{ CustomizeB }}"bind:change="onChangeB"/>
+  </van-radio> 
+  <van-radio name="8" icon-size="27px" disabled wx:if="{{isBriOpen||isAtmOpen}}">
+  <van-field label="RGB值"model:value="{{ Customize }}"/>
+  </van-radio> 
+</van-radio-group>
+  </view> 
+  <!-- 待更改氛围模式
+  <view class="color1_box" >
+  <van-checkbox-group value="{{ result }}" bind:change="onChange4"  direction="horizontal">
+  <van-checkbox name="1" icon-size="27px">红</van-checkbox>
+  <van-checkbox name="2" icon-size="27px">橙</van-checkbox>
+  <van-checkbox name="3" icon-size="27px">黄</van-checkbox>
+  <van-checkbox name="4" icon-size="27px">绿</van-checkbox>
+  <van-checkbox name="5" icon-size="27px">青</van-checkbox>
+  <van-checkbox name="6" icon-size="27px">蓝</van-checkbox>
+  <van-checkbox name="7" icon-size="27px">紫</van-checkbox>
+  <van-checkbox name="8" icon-size="27px" disabled>
+  <van-field label="RGB值" model:value="{{ Customize }}" disabled/></van-checkbox>
+  </van-checkbox-group>
+  </view>
+  -->
+    <!-- 不同选择下的时间、亮度界面 -->
+     <!-- 待更改氛围模式
+    <view class="ligth_box" wx:if="{{isAtmOpen}}">
+      <view >间隔时间</view>
+      <view class="time_box">
+        <van-slider value="{{ times }}" min="0"  step="1" max="100" bind:change="onDrag2" />
+      </view>
+    </view>
+    <view class="ligth_box" wx:if="{{isBriOpen}}">
+      <view >间隔时间</view>
+      <view class="time_box">
+        <van-slider  disabled value="{{ times }}" min="0"  step="1" max="100" bind:change="onDrag2" />
+      </view>
+    </view>
+      -->
+    <view wx:if="{{!isAtmOpen&&!isBriOpen}}">
+    <view class="ligth1_box" wx:if="{{corlornum!=0}}">
+      <view >亮度 </view>
+      <view class="regulate_box">
+        <van-slider value="{{ brightness }}" min="0"  step="1" max="100" bind:change="onDrag" />
+      </view>
+    </view>
+    <view class="ligth2_box" wx:if="{{corlornum==0}}">
+    </view>
+    </view>
+    <view class="ligth_box" wx:if="{{isAtmOpen||isBriOpen}}">
+      <view >亮度</view>
+      <view class="regulate_box">
+        <van-slider disabled value="{{ brightness }}" min="0"  step="1" max="100"  />
+      </view>
+    </view>
+    <!-- 不同选择下的结尾界面 -->
+    <view class="led_style">
+      <van-button color="{{isLedOpen?'#d9d9d9':'#97baff'}}" 
+        size="small" bindtap="onDrag1">开灯</van-button>
+        <van-button color="{{!isLedOpen?'#d9d9d9':'#97baff'}}"
+       size="small" bindtap="onDrag1">关灯</van-button>
+    </view>
+      <!-- 待更改氛围模式
+    <view class="led_style" wx:if="{{isAtmOpen}}">
+      <van-button color="{{isSend?'#d9d9d9':'#97baff'}}" 
+        size="small" bindtap="onDrag3">确认</van-button>
+        <van-button color="{{!isSend?'#d9d9d9':'#97baff'}}"
+       size="small" bindtap="onDrag3">修改</van-button>
+    </view>
+     -->
+  </view>
+  <!-- 遥控器 -->
+  <view class="mqtt_box" bindtap="open2" wx:if="{{!isOpen2}}">
+    <view>
+    <van-icon wx:if="{{!isOpen2}}"name="arrow-down"/>
+     遥控器
+   </view>
+  </view>
+  <view class="car_box"  name="arrow-up" wx:if="{{isOpen2}}" >
+    <van-icon wx:if="{{isOpen2}}"size="20px" name="arrow-up" bindtap="open2"></van-icon>
+      <!-- 平移控制 -->
+    <view class="button_box" >
+      <van-icon name="arrow-up"  size="75px"  bindtouchend="{{(isFolOpen||isRevOpen)?'':'advance'}}" color="{{move4?'rgb(22,218,113)':'rgb(0,0,0)'}}"/>
+    </view>
+    <view class="up_box">
+    <van-icon name="arrow-left" size="75px" bindtap="{{(isFolOpen||isRevOpen)?'':'left'}}" color="{{move3?'rgb(22,218,113)':'rgb(0,0,0)'}}"/>
+    <van-icon name="arrow" size="75px" bindtap="{{(isFolOpen||isRevOpen)?'':'right'}}" color="{{move1?'rgb(22,218,113)':'rgb(0,0,0)'}}"/>
+    </view>
+    <view class="down_box">
+      <van-icon name="arrow-down" size="75px" bindtap="{{(isFolOpen||isRevOpen)?'':'receding'}}"  color="{{move2?'rgb(22,218,113)':'rgb(0,0,0)'}}" />
+    </view>
+    <view class="follow_box">
+      <view >跟随模式</view>
+      <view >
+        <switch checked="{{isFolOpen}}" color="#97baff" bindchange="onChange6"/></view>
+    </view>
+    <view class="follow_box">
+      <view >小陀螺</view>
+      <view wx:if="{{!isFolOpen}}">
+        <switch checked="{{isRevOpen}}" color="#97baff"  bindchange="onChange7" />
+      </view>
+      <view wx:if="{{isFolOpen}}">
+        <switch checked="{{isRevOpen}}" color="#97baff" disabled bindchange="" />
+      </view>
+  </view>  
+  </view>
+   <!-- 看家模式 -->
+  <view class="special_box" >
+      <view >看家模式</view>
+      <view >
+        <switch checked="{{isSpeOpen}}" color="#97baff" bindchange="onChange8"/></view>
+  </view>
+</view>
+ <!-- mqtt部分 -->
+<van-popup
+  show="{{ mqttConnectDialog }}"
+  bind:close="onClose"
+  position="bottom"
+  custom-style="height: 61%;">
+  <view>
+    <van-cell-group>
+     <van-field label="address" model:value="{{ address }}"/>
+      <van-field label="port" model:value="{{ port }}"/>
+      <van-field label="usename"  model:value="{{ username }}"/>
+      <van-field label="passwprd" type="password" model:value="{{ password }}"/>
+    </van-cell-group>
+    <view class="btn_style">
+      <van-button size="small"  color="{{isConnect?'#d9d9d9':'#97baff'}}" bindtap="{{!isConnect?'connectMqtt':''}}" >连接</van-button
+>
+      <van-button size="small"  color="{{!isConnect?'#d9d9d9':'#97baff'}}" bindtap="{{isConnect?'closeConnect':''}}">断开</van-button
+>
+    </view>
+      <van-cell-group>
+        <view class="subscribe_text">
+        订阅地址
+        </view>
+        <van-field model:value="{{ push }}"
+        placeholder="请输入订阅地址"/>
+        <view class="btn_style">
+        <van-button color="{{isPush?'#d9d9d9':'#97baff'}}"   size="small" bindtap="{{!isPush?'addPush':''}}" >订阅</van-button>
+        <van-button color="{{!isPush?'#d9d9d9':'#97baff'}}"  size="small" bindtap="{{isPush?'closePush':''}}" >断开</van-button>
+       </view>
+        <view class="subscribe_text">
+        发布地址
+        </view>
+        <van-field model:value="{{ subscr }}"
+        placeholder="请输入发布地址"/>
+        <view class="btn_style">
+        <van-button color="{{isSubscr?'#d9d9d9':'#97baff'}}"  size="small" bindtap="{{!isSubscr?'addsubscr':''}}" >发布</van-button>
+        <van-button color="{{!isSubscr?'#d9d9d9':'#97baff'}}" size="small" bindtap="{{isSubscr?'closesubscr':''}}">断开</van-button>
+       </view>
+      </van-cell-group>
+  </view>
+</van-popup>
+ <!-- 蓝牙部分 -->
+<van-popup
+  show="{{ bluetoothDialog }}"
+  bind:close="onCloseBluetooth"
+  position="bottom"
+  custom-style="height: 61%;">
+  <bluetooth-comp/>
+</van-popup>
